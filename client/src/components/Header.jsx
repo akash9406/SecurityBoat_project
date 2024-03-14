@@ -118,7 +118,7 @@ const Header = () => {
             <span className="action_name">Wishlist</span>
           </div>
 
-          <Link className="action_container">
+          <Link to={"/cart"} className="action_container">
             <IoBagOutline />
             <span className="action_name">Bag</span>
           </Link>

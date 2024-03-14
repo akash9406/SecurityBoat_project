@@ -447,3 +447,74 @@ color: #111827;
   transition: 500ms ease;
   
 }
+.Product_btn{
+ background-color: #e11d4e;
+ width: 100%;
+ border: none;
+ cursor: pointer;
+ padding: 1rem ;
+ border-radius: 10px;
+ color: white;
+}
+
+.cardwrapper{
+  padding: 7rem;
+  background-color: rgba(248, 195, 96, 0.189);
+  display: flex;
+  width: 100%;
+  min-height: 88vh;
+}
+.card-main{
+  margin-left:10vw;
+  min-height:70vh;
+  border-radius: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  width: 50vw;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+.cardsingle{
+  width: 100%;
+  height: 20vh;
+  padding: 1rem;
+  border-bottom: 1px solid wheat;
+  display: flex;
+  justify-content: space-between;
+}
+.img-container{
+  width: 30%;
+  height: 16vh;
+  border: 1px solid #111827;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.img-container img {
+  object-fit: contain;
+  object-position: center; 
+  width: 100%; 
+  height: 100%; 
+}
+.main-content{
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  align-items: end;
+}
+.main-content p{
+  color:#595a5f ;
+}
+.cartbtn{
+  margin: 0.2rem;
+}
+
+.cartbtn button{
+  margin: 0.2rem;
+  border: none;
+  background-color: #ed003b;
+  padding: 0.3rem;
+  color: #E5E7EB;
+}
+.cartbtn button:nth-child(1){
+  background-color: green;
+}

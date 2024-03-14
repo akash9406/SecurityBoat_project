@@ -4,6 +4,7 @@ import {
   fetchAllProductsAsync,
   fetchProductsByFiltersAsync,
 } from "../redux/productSlice";
+import { addToCartAsync, selectItems } from "../redux/cartSlice";
 
 const ProductList = () => {
   const [open1, setOpen1] = useState(false);
@@ -46,6 +47,17 @@ const ProductList = () => {
 
     setFilter(newFilter);
     // const newFilter = { ...filter, category: e.target.value };
+  };
+
+  const addbagHandler = (e) => {
+    e.preventDefault();
+    console.log(e.target.value);
+    const newItem = {
+      product: e.target.value,
+      quantity: 1,
+    };
+
+    dispatch(addToCartAsync({ item: newItem }));
   };
 
   const dispatch = useDispatch();
@@ -192,10 +204,10 @@ const ProductList = () => {
                 <div className="Product_content">
                   <div>
                     <h3>
-                      <a href={product.thumbnail}>
-                        <span aria-hidden="true" />
-                        {product.title}
-                      </a>
+                      {/* <a href={product.thumbnail}>
+                        <span aria-hidden="true" /> */}
+                      {product.title}
+                      {/* </a> */}
                     </h3>
                     <p className="Product_color">⭐{product.rating}</p>
                   </div>
@@ -214,6 +226,13 @@ const ProductList = () => {
                     )}
                   </p>
                 </div>
+                <button
+                  onClick={addbagHandler}
+                  value={product.id}
+                  className="Product_btn"
+                >
+                  Add To Bag
+                </button>
               </div>
             ))}
           </div>
