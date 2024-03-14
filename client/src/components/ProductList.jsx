@@ -9,35 +9,50 @@ const ProductList = () => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [filter, setFilter] = useState({});
+  const [sort, setSort] = useState({});
   const products = useSelector((state) => state.product.products);
+  const [page, setPage] = useState(1);
 
   const handleSort = (e) => {
-    const newFilter = {
-      ...filter,
+    const sort = {
       _sort: e.target.attributes[2].value,
-      // _order: e.target.attributes[1].value,
+      _order: e.target.attributes[1].value,
     };
-    setFilter(newFilter);
-    dispatch(fetchProductsByFiltersAsync(newFilter));
-    // console.log(e.target.attributes[1]);
-    // console.log(e.target.attributes[2]);
+    console.log({ sort });
+    setSort(sort);
   };
+
+  const handlePage = (page) => {
+    console.log({ page });
+    setPage(page);
+  };
+
   const handleFilter = (e) => {
+    console.log(e.target.checked);
     const newFilter = { ...filter };
     if (e.target.checked) {
-      newFilter["category"] = e.target.value;
+      if (newFilter["category"]) {
+        newFilter["category"].push(e.target.value);
+      } else {
+        newFilter["category"] = [e.target.value];
+      }
     } else {
-      delete newFilter["category"];
+      const index = newFilter["category"].findIndex(
+        (el) => el === e.target.value
+      );
+      newFilter["category"].splice(index, 1);
     }
-    // const newFilter = { ...filter, category: e.target.value };
+    console.log({ newFilter });
+
     setFilter(newFilter);
-    dispatch(fetchProductsByFiltersAsync(newFilter));
+    // const newFilter = { ...filter, category: e.target.value };
   };
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchAllProductsAsync());
-  }, [dispatch]);
+    const pagination = { _page: page, _limit: 100 };
+    dispatch(fetchProductsByFiltersAsync({ filter, sort, pagination }));
+  }, [dispatch, filter, sort, page]);
   return (
     <div className="catertoryfilter">
       <div className="filternavbar">
@@ -55,7 +70,7 @@ const ProductList = () => {
               className="drop-option"
               onClick={(e) => handleSort(e)}
               order="desc"
-              sort="-rating"
+              sort="rating"
             >
               Best Rating
             </div>
@@ -71,7 +86,7 @@ const ProductList = () => {
               className="drop-option"
               onClick={(e) => handleSort(e)}
               order="desc"
-              sort="-price"
+              sort="price"
             >
               Price: High to Low
             </div>

@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const UserRouter = require("./routes/User");
 const connect = require("./data/database");
+const productsRouter = require("./routes/Product");
 
 connect();
 app.use(express.json());
@@ -16,6 +17,7 @@ app.use(
     credentials: true,
   })
 );
+app.use("/products", productsRouter.router);
 app.use("/user/", UserRouter.router);
 app.listen(process.env.PORT, () => {
   console.log("server is connected");
